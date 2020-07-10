@@ -11,24 +11,32 @@
 			<input v-model="inputValue" />
 			<button @click="onSubmit">提交</button>
 			<!-- 定义一个content数据绑定一个表达式item  传入到组件   组件通过props中定义接受的数据字段content  然后在template中则可以使用改数据字段 -->
-			<todo-item v-for="(item,index) of list" :key="index" :content="item"></todo-item>  
+			<!-- 侦听子组件触发的delete时间  定义一个handleDelete执行操作  handleDelete是在父组件的template中 所以handleDelete在父组件的methods中定义该方法 -->
+			<todo-item v-for="(item,index) of list" :key="index" :content="item" :index="index" @delete="handleDelete"></todo-item>  
 		</div>
 		
 		<script>
 			//每一个组件 都是一个vue实例  每个vue实例 都是一个组件   都有data methods computed watch等属性
 			// 全局组件设置
-			// Vue.component("todo-item",{
-			// 	templat'<li>item</li>'
-			// })
-			var todoItem = {
+			Vue.component("todo-item",{
 				template: '<li @click="handleClick">{{content}}</li>',
-				props:["content"],
+				props:['content','index'],
 				methods:{
 					handleClick:function(){
-						alert("aaa");
+						this.$emit("delete",this.index);  //this.index 指向 props接受的index
 					}
 				}
-			}
+			})
+			//局部组件
+			// var todoItem = {
+			// 	template: '<li @click="handleClick">{{content}}</li>',
+			// 	props:['content','index'],
+			// 	methods:{
+			// 		handleClick:function(){
+			// 			alert("aaa");
+			// 		}
+			// 	}
+			// }
 			
 			//vue实例
 			var vm = new Vue({
@@ -37,10 +45,10 @@
 					inputValue: '',
 					list: []
 				},
-				components: {
-					"todoItem": todoItem, //局部组件  可以用驼峰命名  div标签中使用的时候用todo-item 会自动识别
-					// "todo-item":todoItem  //局部组件  
-				},
+				// components: {
+				// 	"todoItem": todoItem, //局部组件  可以用驼峰命名  div标签中使用的时候用todo-item 会自动识别
+				// 	// "todo-item":todoItem  //局部组件  
+				// },
 				methods: {
 					onSubmit: function() {
 						if(this.inputValue!="")
@@ -50,6 +58,10 @@
 						}else{
 							alert("请在输入框内输入内容");
 						}
+					},
+					handleDelete:function(index){
+						// alert(index);
+						this.list.splice(index,1);
 					}
 				}
 			})
