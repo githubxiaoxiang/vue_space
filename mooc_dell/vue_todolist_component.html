@@ -6,21 +6,31 @@
 		<script src="lib/vue.js"></script>
 	</head>
 	<body>
+		<!-- vue挂载的template -->
 		<div id="root">
 			<input v-model="inputValue" />
 			<button @click="onSubmit">提交</button>
 			<!-- 定义一个content数据绑定一个表达式item  传入到组件   组件通过props中定义接受的数据字段content  然后在template中则可以使用改数据字段 -->
 			<todo-item v-for="(item,index) of list" :key="index" :content="item"></todo-item>  
 		</div>
+		
 		<script>
+			//每一个组件 都是一个vue实例  每个vue实例 都是一个组件   都有data methods computed watch等属性
 			// 全局组件设置
 			// Vue.component("todo-item",{
 			// 	templat'<li>item</li>'
 			// })
 			var todoItem = {
-				template: '<li>{{content}}</li>',
-				props:["content"]
+				template: '<li @click="handleClick">{{content}}</li>',
+				props:["content"],
+				methods:{
+					handleClick:function(){
+						alert("aaa");
+					}
+				}
 			}
+			
+			//vue实例
 			var vm = new Vue({
 				el: "#root",
 				data: {
