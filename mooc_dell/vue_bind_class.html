@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>vue Class绑定</title>
+    <script src="lib/vue.js"></script>
+    <style>
+        .normal {
+            font-weight: bold;
+        }
+        
+        .size {
+            font-size: 36px;
+        }
+        
+        .red {
+            background-color: red;
+            border: solid 2px blue;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- v-bind 用于 class 和 style 时，Vue.js 做了专门的增强。表达式结果的类型除了字符串之外，还可以是对象或数组。 -->
+    <div id="root">
+        <!-- 对象语法-->
+        <!-- red 这个 class 存在与否将取决于数据 property isRed 的 truthiness。 -->
+        <!-- <div :class="{red:isRed}">我是一个测试文本哈哈哈</div> -->
+
+        <!-- 在对象中传入更多字段来动态切换多个 class -->
+        <!-- <div :class="{red:isRed,size:true}">我是一个测试文本哈哈哈</div> -->
+        <!-- <div :class="{red:isRed,size:showSize}">我是一个测试文本哈哈哈</div> -->
+
+        <!-- v-bind:class 指令也可以与普通的 class attribute 共存 其中normal是普通的属性-->
+        <!-- <div class="normal" :class="{red:isRed,size:showSize}">我是一个测试文本哈哈哈</div> -->
+
+        <!-- 直接字符串映射class -->
+        <!-- <div class="normal">我是一个测试文本哈哈哈</div> -->
+        <!-- 字符串为data中变量：定义了一个class 类的字符串-->
+        <!-- <div class="normalClass">我是一个测试文本哈哈哈</div> -->
+
+        <!-- 绑定的数据对象不必内联定义在模板里  可以在data中定义一个数据对象 -->
+        <!-- <div :class="classObject">我是一个测试文本哈哈哈</div> -->
+
+        <!-- 绑定一个返回对象的计算属性 -->
+        <!-- <div :class="computeClassObject">我是一个测试文本哈哈哈</div> -->
+
+
+        <!-- 数组语法 -->
+        <!-- 第一种 -->
+        <!-- <div :class="[redClass,sizeClass]">我是一个测试文本哈哈哈</div> -->
+
+        <!-- 第二种 根据条件切换列表中的 class -->
+        <!-- <div :class="[isRed?redClass:'',sizeClass]">我是一个测试文本哈哈哈</div> -->
+        <!-- 等价写法 当有多个条件 class 时这样写有些繁琐。所以在数组语法中也可以使用对象语法 -->
+        <!-- <div :class="[{redClass:isRed},sizeClass]">我是一个测试文本哈哈哈</div> -->
+        <div :class="[{'red':isRed},'size']">我是一个测试文本哈哈哈</div>
+
+
+        <button @click="changClassHandle">改变class</button>
+    </div>
+    <script>
+        var vm = new Vue({
+            el: "#root",
+            data: {
+                isRed: false,
+                showSize: false,
+                classObject: {
+                    red: true, //data中定义一个class对象 不能在引用data中的数据 错误：red:isRed 要引用只能用计算属性
+                    size: false
+                },
+                normalClass: "normal",
+                redClass: "red",
+                sizeClass: "size"
+            },
+            computed: {
+                computeClassObject: function() {
+                    return {
+                        red: this.isRed,
+                        size: this.showSize
+                    };
+                }
+            },
+            methods: {
+                changClassHandle: function() {
+                    this.isRed = !this.isRed;
+                    this.showSize = !this.showSize;
+                }
+            },
+        })
+    </script>
+</body>
+
+</html>
