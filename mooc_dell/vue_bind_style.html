@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>vue style绑定</title>
+    <script src="lib/vue.js"></script>
+</head>
+
+<body>
+    <div id="root">
+        <!-- 对象语法 -->
+        <!-- 看着非常像 CSS，但其实是一个 JavaScript 对象。CSS property 名可以用驼峰式 (camelCase) 或短横线分隔 (kebab-case，记得用引号括起来) 来命名 -->
+        <!-- <div :style="{color:'red'}">我是一个文本</div> -->
+        <!-- <div :style="{color:styleColor,fontSize:styleFontSize+'px'}">我是一个文本</div> -->
+
+        <!-- 直接绑定到一个样式对象 -->
+        <!-- <div :style="styleObject">我是一个文本</div> -->
+
+        <!-- 绑定一个返回对象的计算属性 -->
+        <!-- <div :style="computeStyleObject">我是一个文本</div> -->
+
+
+        <!-- 数组语法 -->
+        <!-- <div :style="[styleObject,boldStyle]">我是一个文本</div> -->
+        <!-- <div :style="[styleObject,isBold?boldStyleObject:'']">我是一个文本</div> -->
+
+        <!-- 特别注意   特别注意 特别注意  不能跟class中 数组中嵌着{}写法-->
+        <div :style="[styleObject,{boldStyleObject:isBold}]">我是一个文本</div>
+    </div>
+    <script>
+        var vm = new Vue({
+            el: "#root",
+            data: {
+
+                styleColor: 'red',
+                styleFontSize: '36',
+                styleObject: {
+                    color: 'red',
+                    fontSize: '36px'
+                },
+                boldStyleObject: {
+                    fontWeight: 'bold'
+                },
+                isBold: true
+            },
+            computed: {
+                computeStyleObject: function() {
+                    return {
+                        fontSize: this.styleFontSize + 'px'
+                    };
+                }
+            },
+        })
+    </script>
+</body>
+
+</html>
