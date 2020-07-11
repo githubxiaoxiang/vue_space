@@ -15,28 +15,29 @@
 	<div>我不是挂载点{{msg}}不生效</div>
     <script>
 		<!--挂载点，模板，实例之间的关系-->
+		//不要在选项 property 或回调上使用箭头函数，比如 created: () => console.log(this.a) 或 vm.$watch('a', newValue => this.myMethod())。因为箭头函数并没有 this
 			var vm=new Vue({
 			el:"#div1", //挂载点
 			template:'<h1>我是一个标题{{msg}}</h1>', //模板用 ''
 			data:{
 				msg:"hello world",
 			},
-			beforeCreate:()=>{
-				console.log("beforeCreate")
+			beforeCreate:function(){
+				console.log("beforeCreate");
 			},
-			created:()=>{
-				console.log("created")
+			created:function(){
+				console.log("created");
 			},
-			beforeMount:()=>{
+			beforeMount:function(){
 				console.log("beforeMount")
 			},
-			mounted:()=>{
+			mounted:function(){
 				console.log("mounted")
 			},
-			beforeDestroy:()=>{
+			beforeDestroy:function(){
 				console.log("beforeDestroy");
 			},
-			destroyed:()=>{
+			destroyed:function(){
 				console.log("destroyed");
 			}
 		})
