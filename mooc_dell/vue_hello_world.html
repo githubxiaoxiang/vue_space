@@ -2,45 +2,45 @@
 <html lang="en">
 
 <head>
-	<meta charset="utf-8"></meta>
+    <meta charset="utf-8"></meta>
     <title>VUE2.5 入门 HelloWorld</title>
     <script src="lib/vue.js"></script>
 </head>
 
 <body>
-	<!-- div挂载点下的标签都是模板 也可以写在vue实例中 teamplate中  template中有模板时 div标签的不生效 -->
+    <!-- div挂载点下的标签都是模板 也可以写在vue实例中 teamplate中  template中有模板时 div标签的不生效 -->
     <div id="div1">
-	<!-- {{msg}}  -->
-	</div>
-	<div>我不是挂载点{{msg}}不生效</div>
+        <!-- {{msg}}  -->
+    </div>
+    <div>我不是挂载点{{msg}}不生效</div>
     <script>
-		<!--挂载点，模板，实例之间的关系-->
-		//不要在选项 property 或回调上使用箭头函数，比如 created: () => console.log(this.a) 或 vm.$watch('a', newValue => this.myMethod())。因为箭头函数并没有 this
-			var vm=new Vue({
-			el:"#div1", //挂载点
-			template:'<h1>我是一个标题{{msg}}</h1>', //模板用 ''
-			data:{
-				msg:"hello world",
-			},
-			beforeCreate:function(){
-				console.log("beforeCreate");
-			},
-			created:function(){
-				console.log("created");
-			},
-			beforeMount:function(){
-				console.log("beforeMount")
-			},
-			mounted:function(){
-				console.log("mounted")
-			},
-			beforeDestroy:function(){
-				console.log("beforeDestroy");
-			},
-			destroyed:function(){
-				console.log("destroyed");
-			}
-		})
+        // 挂载点，模板，实例之间的关系
+        //不要在选项 property 或回调上使用箭头函数，比如 created: () => console.log(this.a) 或 vm.$watch('a', newValue => this.myMethod())。因为箭头函数并没有 this
+        var vm = new Vue({
+            el: "#div1", //挂载点
+            template: '<h1>我是一个标题{{msg}}</h1>', //模板用 ''
+            data: {
+                msg: "hello world",
+            },
+            beforeCreate: function() {
+                console.log("beforeCreate");
+            },
+            created: function() {
+                console.log("created");
+            },
+            beforeMount: function() {
+                console.log("beforeMount")
+            },
+            mounted: function() {
+                console.log("mounted")
+            },
+            beforeDestroy: function() {
+                console.log("beforeDestroy");
+            },
+            destroyed: function() {
+                console.log("destroyed");
+            }
+        })
     </script>
 </body>
 

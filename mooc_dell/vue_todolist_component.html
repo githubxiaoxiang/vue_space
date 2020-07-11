@@ -18,14 +18,22 @@
     </div>
 
     <script>
-        //每一个组件 都是一个vue实例  每个vue实例 都是一个组件   都有data methods computed watch等属性
+        //每一个组件 都是一个vue实例  每个vue实例 都是一个组件   都有data methods computed watch等属性 不包含el
+        // 组件是可复用的 Vue 实例，所以它们与 new Vue 接收相同的选项，例如 data、computed、watch、methods 以及生命周期钩子等。仅有的例外是像 el 这样根实例特有的选项。
+        // 当我们定义这个 <button-counter> 组件时，你可能会发现它的 data 并不是像这样直接提供一个对象：
         // 全局组件设置
         Vue.component("todo-item", {
-                template: '<li @click="handleClick">{{content}}</li>',
+                template: '<li @click="handleClick">{{content}}{{dataA}}</li>',
                 props: ['content', 'index'],
                 methods: {
                     handleClick: function() {
+                        // this.dataA += "bbb";
                         this.$emit("delete", this.index); //this.index 指向 props接受的index
+                    }
+                },
+                data: function() {
+                    return {
+                        dataA: "aaaa"
                     }
                 }
             })
