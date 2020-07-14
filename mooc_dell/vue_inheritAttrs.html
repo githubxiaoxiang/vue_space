@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>vue inheritAttrs</title>
+    <script src="lib/vue.js"></script>
+</head>
+
+<body>
+    <!-- 添加inheritAttrs：false，组件将不会把未被注册的props呈现为普通的HTML属性  在组件里我们可以通过其$attrs可以获取到没有使用的注册属性，如果需要，我们在这也可以往下继续传递-->
+    <!-- 不影响 class 和 style 绑定 -->
+    <div id="root">
+        <a href="https://www.jianshu.com/p/ce8ca875c337">学习地址</a>
+        <test-comp :title="title" :message="message"></test-comp>
+    </div>
+    <script>
+        //局部组件
+        var testComp = {
+            template: '<div>今天是个好天气{{title}}</div>',
+            props: ['title'],
+            inheritAttrs: false,
+            created: function() {
+                // 打印出来{message: "信息aaa"}
+                console.log(this.$attrs);
+            }
+        }
+        var vm = new Vue({
+            el: "#root",
+            data: {
+                title: 'title标题',
+                message: '信息aaa'
+            },
+            components: {
+                testComp
+            }
+        })
+    </script>
+</body>
+
+</html>
