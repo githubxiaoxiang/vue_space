@@ -12,7 +12,16 @@
             <a :href="url" :class="cls">百度</a>
             <slot></slot>
             <span>我是两个插槽间的一个分割文本</span>
-            <slot name="mySlot"></slot>
+            <!-- 插槽名用小写 因为在template标签中大写会被转换成小写 -->
+            <slot name="myslot"></slot>
+        </div>
+    </script>
+    <script type="text/x-template" id="current-user-template">
+        <div>
+            <span>
+                <!-- 绑定在 <slot> 元素上的 attribute 被称为插槽 prop -->
+                <slot v-bind:user="user">{{user.lastName}}</slot>
+            </span>
         </div>
     </script>
 </head>
@@ -26,8 +35,59 @@
             <ul>
                 <li>我是默认插槽的内容</li>
             </ul>
-            <h1 slot="mySlot">我是插槽名为mySlot里的内容</h1>
+            <!-- <h1 slot="mySlot">我是插槽名为mySlot里的内容</h1> -->
+
+            <!-- v-slot 只能添加在 <template> 上 (只有一种例外情况 独占默认插槽的缩写语法)，这一点和已经废弃的 slot attribute 不同。 -->
+            <template v-slot:myslot>
+                <h1>我是插槽名为mySlot里的内容</h1>
+            </template>
         </navigation-link>
+
+        <!-- 作用域插槽 -->
+        <!-- 让插槽内容能够访问子组件中才有的数据是很有用 -->
+        <!-- 包含所有插槽 prop 的对象命名为 slotProps 你也可以使用任意你喜欢的名字-->
+        <!-- <current-user>
+            <template v-slot:default="slotProps">
+                {{slotProps.user.firstName}}
+            </template>
+        </current-user> -->
+
+        <!-- 独占默认插槽的缩写语法  只有一个默认插槽 可以v-slot不在template中-->
+        <!-- <current-user v-slot:default="slotProps">
+            {{slotProps.user.firstName}}
+        </current-user> -->
+
+        <!-- <current-user v-slot="slotProps">
+            {{slotProps.user.firstName}}
+        </current-user> -->
+
+        <!-- 解构插槽 Prop -->
+        <!-- 在支持的环境下 (单文件组件或现代浏览器)，你也可以使用 ES2015 解构来传入具体的插槽 prop -->
+        <!-- <current-user v-slot="{user}">
+            {{user.firstName}}
+        </current-user> -->
+
+        <!-- 将 user 重命名为 person -->
+        <!-- <current-user v-slot="{user:person}">
+            {{person.firstName}}
+        </current-user> -->
+
+        <!-- 定义后备内容，用于插槽 prop 是 undefined  -->
+        <!-- <current-user v-slot="{person={firstName:'Guest'}}">
+            {{person.firstName}}
+        </current-user> -->
+
+        <!-- (v-slot:) 简写 #  简写后默认插槽也必须带default-->
+        <!-- <current-user>
+            <template #default="slotProps">
+                {{slotProps.user.firstName}}
+            </template>
+        </current-user> -->
+
+        <current-user #default="{user}">
+            {{ user.firstName }}
+        </current-user>
+
     </div>
     <script>
         Vue.component("navigation-link", {
@@ -36,6 +96,17 @@
             data: function() {
                 return {
                     cls: "styleA",
+                }
+            }
+        })
+        Vue.component("current-user", {
+            template: "#current-user-template",
+            data: function() {
+                return {
+                    user: {
+                        firstName: '张',
+                        lastName: '飞'
+                    }
                 }
             }
         })
