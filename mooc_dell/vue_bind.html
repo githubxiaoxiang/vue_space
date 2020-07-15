@@ -1,33 +1,35 @@
 <!DOCTYPE html>
 <html>
-	<head>
-		<meta charset="utf-8">
-		<title>vue 数据绑定和双向数据绑定</title>
-		<script src="lib/vue.js"></script>
-	</head>
-	<body>
-		<!-- v-bind数据绑定 可缩写成: 只要有v-bind则"title"则不是一个字符串了 而是一个表达式了其中title指向data中定义的变量title -->
-		<!-- v-model 双向数据绑定 -->
-		<div id="root">
-			<!-- <div v-bind:title="title">{{msg}}</div> -->
-			<!-- <div v-bind:title="'del '+title">{{msg}}</div> -->
-			<!-- <div :title="'del'+title">{{msg}}</div> -->
-			
-			<!-- 双向绑定 -->
-			<div :title="title">{{msg}}</div>
-			<input v-model:value="content"></input>
-			<div>{{content}}</div>
-		</div>
-		<script>
-			var vm = new Vue(
-			{
-				el:"#root",
-				data:{
-					msg:"hello world",
-					title:"this is hello world",
-					content:"this is content"
-				}
-			})
-		</script>,
-	</body>
+
+<head>
+    <meta charset="utf-8">
+    <title>vue 数据绑定和双向数据绑定</title>
+    <script src="lib/vue.js"></script>
+</head>
+
+<body>
+    <!-- v-bind数据绑定 可缩写成: 只要有v-bind则"title"则不是一个字符串了 而是一个表达式了其中title指向data中定义的变量title -->
+    <!-- v-model 双向数据绑定 -->
+    <div id="root">
+        <!-- <div v-bind:title="title">{{msg}}</div> -->
+        <!-- <div v-bind:title="'del '+title">{{msg}}</div> -->
+        <!-- <div :title="'del'+title">{{msg}}</div> -->
+
+        <!-- 双向绑定 -->
+        <div :title="title">{{msg}}</div>
+        <input v-model:value="content"></input>
+        <div>{{content}}</div>
+    </div>
+    <script>
+        var vm = new Vue({
+            el: "#root",
+            data: {
+                msg: "hello world",
+                title: "this is hello world",
+                content: "this is content"
+            }
+        })
+    </script>,
+</body>
+
 </html>
