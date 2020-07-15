@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Vue slot</title>
+    <script src="lib/vue.js"></script>
+    <script type="text/x-template" id="navigation-link-template">
+        <!-- 要加<div></div>标签 不然会报错 Component template should contain exactly one root element. If you are using v-if on multiple elements, use v-else-if to chain them instead-->
+        <!-- 一个不带 name 的 <slot> 出口会带有隐含的名字“default” -->
+        <div>
+            <a :href="url" :class="cls">百度</a>
+            <slot></slot>
+            <span>我是两个插槽间的一个分割文本</span>
+            <slot name="mySlot"></slot>
+        </div>
+    </script>
+</head>
+
+<body>
+    <!-- 在 2.6.0 中，我们为具名插槽和作用域插槽引入了一个新的统一的语法 (即 v-slot 指令)。它取代了 slot 和 slot-scope -->
+    <!-- Vue 实现了一套内容分发的 API 将 <slot> 元素作为承载分发内容的出口。 -->
+    <!-- <navigation-link> 的 template 中没有包含一个 <slot> 元素，则该组件起始标签和结束标签之间的任何内容都会被抛弃。 -->
+    <div id="root">
+        <navigation-link url="http://www.baidu.com">
+            <ul>
+                <li>我是默认插槽的内容</li>
+            </ul>
+            <h1 slot="mySlot">我是插槽名为mySlot里的内容</h1>
+        </navigation-link>
+    </div>
+    <script>
+        Vue.component("navigation-link", {
+            template: "#navigation-link-template",
+            props: ['url'],
+            data: function() {
+                return {
+                    cls: "styleA",
+                }
+            }
+        })
+        var vm = new Vue({
+            el: "#root",
+            data: {
+
+            }
+        })
+    </script>
+</body>
+
+</html>
