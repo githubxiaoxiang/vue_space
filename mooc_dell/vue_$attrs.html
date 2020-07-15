@@ -10,6 +10,7 @@
 <body>
     <div id="root">
         <h1>测试$attrs</h1>
+        <!-- 3个层级 可以设置在只能中间层级   多个层级就考虑vuex吧，或者props跟其他结合的方法-->
         <!-- 父组件传递下来的数据 但是在你的子组件里没注册使用的  sex age绑定了 childcomp的props没有注册  会传递到 grandComp 中-->
         <child-comp :name="name" :sex='sex' :age='age'></child-comp>
     </div>
