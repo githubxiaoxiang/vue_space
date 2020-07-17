@@ -18,7 +18,7 @@ npm run build
 ### Customize configuration
 See [Configuration Reference](https://cli.vuejs.org/config/).
 #vue cli脚手架
-需预先安装npm
+需预先安装npm node
 
 npm install -g @vue/cli-service-global  ---安装全局的扩展
 vue create hello-world  ----创建一个新项目
