@@ -76,6 +76,7 @@
         <input type="text" v-model.trim="msg2">
         <span>输入内容:{{msg2}}</span>
 
+        <button-count></button-count>
         <!-- <a v-on:[eventName]="doSomething"></a>
         <a v-on:focus="doSomething"></a>
         <form v-on:submit.prevent="onSubmit"></form> -->
@@ -83,6 +84,19 @@
     </div>
     <script type="text/javascript">
         Vue.config.productionTip = false
+        Vue.component("button-count", {
+            data: function() {
+                return {
+                    count: 0
+                }
+            },
+            template: '<button v-on:click="countAdd">you click me {{count}}</button>',
+            methods: {
+                countAdd: function() {
+                    return this.count++;
+                }
+            }
+        })
         const vm = new Vue({
             el: "#root",
             // data: function() {
