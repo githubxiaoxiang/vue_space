@@ -76,7 +76,12 @@
         <input type="text" v-model.trim="msg2">
         <span>输入内容:{{msg2}}</span>
 
+        <br>
         <button-count></button-count>
+        <button-count></button-count>
+
+        <br>
+        <blog-post v-for="(item, index) in blogDatas" :key="index" :blog="item"></blog-post>
         <!-- <a v-on:[eventName]="doSomething"></a>
         <a v-on:focus="doSomething"></a>
         <form v-on:submit.prevent="onSubmit"></form> -->
@@ -96,6 +101,10 @@
                     return this.count++;
                 }
             }
+        })
+        Vue.component("blog-post", {
+            props: ["blog"],
+            template: '<h2>title内容是{{blog.title}}</h2>'
         })
         const vm = new Vue({
             el: "#root",
@@ -152,7 +161,17 @@
                     }, {
                         text: "战斗力",
                         value: 3
-                    }]
+                    }],
+                    blogDatas: [{
+                        id: 1,
+                        title: "blog1"
+                    }, {
+                        id: 2,
+                        title: "blog2"
+                    }, {
+                        id: 2,
+                        title: "blog3"
+                    }, ]
                 }
             },
             computed: {
