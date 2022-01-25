@@ -81,7 +81,9 @@
         <button-count></button-count>
 
         <br>
-        <blog-post v-for="(item, index) in blogDatas" :key="index" :blog="item"></blog-post>
+        <blog-post v-for="(item, index) in blogDatas" :key="item.id" :blog="item"></blog-post>
+
+        <num-change v-on:dis-num-change="onNumChange"></num-change>
         <!-- <a v-on:[eventName]="doSomething"></a>
         <a v-on:focus="doSomething"></a>
         <form v-on:submit.prevent="onSubmit"></form> -->
@@ -105,6 +107,18 @@
         Vue.component("blog-post", {
             props: ["blog"],
             template: '<h2>title内容是{{blog.title}}</h2>'
+        })
+
+        Vue.component("num-change", {
+            template: `
+            <button v-on:click="emitNumChange">按钮</button>
+            `,
+            methods: {
+                emitNumChange: function() {
+                    // <button v-on:click="$emit('dis-num-change', 3)">按钮</button>
+                    this.$emit("dis-num-change", 2)
+                }
+            }
         })
         const vm = new Vue({
             el: "#root",
@@ -163,13 +177,13 @@
                         value: 3
                     }],
                     blogDatas: [{
-                        id: 1,
+                        id: "b1",
                         title: "blog1"
                     }, {
-                        id: 2,
+                        id: "b2",
                         title: "blog2"
                     }, {
-                        id: 2,
+                        id: "b3",
                         title: "blog3"
                     }, ]
                 }
@@ -216,6 +230,9 @@
                 },
                 enterClick2: function() {
                     alert("enter1")
+                },
+                onNumChange: function(num) {
+                    console.log("onNumChange--" + num)
                 }
             }
         })
