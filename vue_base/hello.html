@@ -48,6 +48,34 @@
         <label for="third">Third</label>
         <br>
         <span>checkNames:{{checkedNames}}</span>
+        <div>---------------------单选-------------------</div>
+        <input type="radio" id="one" value="1" v-model="radioValue">
+        <label for="one">选项1</label>
+        <input type="radio" id="two" value="2" v-model="radioValue">
+        <label for="two">选项2</label>
+        <br>
+        <span>radio 选择的值是：{{radioValue}}</span>
+        <div>---------------select-----------------</div>
+        <select name="select" id="s1" v-model="seleted">
+            <option v-for="(item, index) in selectOption" :key="index" :value="item.value">{{item.text}}</option>
+        </select>
+        <span>Selected: {{ seleted }}</span>
+
+        <br>
+        <!-- 添加 lazy 修饰符，从而转为在 change 事件_之后_进行同步： -->
+        <input v-model.lazy="msg">
+        <span>输入内容{{msg}}</span>
+
+        <br>
+        <!-- 自动将用户的输入值转为数值类型 -->
+        <input v-model.number="age" type="number">
+        <span>输入年龄{{age}}</span>
+
+        <br>
+        <!-- 自动过滤用户输入的首尾空白字符 -->
+        <input type="text" v-model.trim="msg2">
+        <span>输入内容:{{msg2}}</span>
+
         <!-- <a v-on:[eventName]="doSomething"></a>
         <a v-on:focus="doSomething"></a>
         <form v-on:submit.prevent="onSubmit"></form> -->
@@ -73,8 +101,13 @@
                     count: 1,
                     count2: 1,
                     message: "",
+                    radioValue: "",
+                    msg: "",
+                    msg2: "",
+                    age: 1,
                     checked: false,
                     checkedNames: [],
+                    seleted: "1",
                     classObject: {
                         active: true
                     },
@@ -95,7 +128,17 @@
                         title: "ab",
                         desc: "bbb"
                     },
-                    nums: [5, 9, 10, 1, 2, 4]
+                    nums: [5, 9, 10, 1, 2, 4],
+                    selectOption: [{
+                        text: "等级",
+                        value: 1
+                    }, {
+                        text: "星级",
+                        value: 2
+                    }, {
+                        text: "战斗力",
+                        value: 3
+                    }]
                 }
             },
             computed: {
