@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>vue hello</title>
+    <script type="text/javascript" src="././lib/vue.js"></script>
+</head>
+
+<body>
+    <div id="root">
+        <h1>hello world {{name}} address{{address}}</h1>
+        <h2 v-if="isActive">bbbb</h2>
+        <ul>
+            <li v-for="(item,index) in list" :key="item.id">
+                {{item.name}}---{{index}}
+            </li>
+        </ul>
+        <ul>
+            <li v-for="(value,key,index) in obj" :key="index">
+                {{key}}---- {{value}}----{{index}}
+            </li>
+        </ul>
+        <div v-for="(item,index) in filterNums" :key="index">
+            数字：{{item}}
+        </div>
+
+        <button v-on:click="count+=1">Add</button>
+        <div>{{count}}</div>
+        <button v-on:click="calCount2">Add</button>
+        <div>{{count2}}</div>
+        <button v-on:click.once="calCount3($event,'mymessage')">Add</button>
+        <input v-on:keyup.enter="enterClick">
+        <input v-on:keyup.alt.67="enterClick2">
+        <div>Base</div>
+        <input type="text" v-model='message' placeholder="请输入文字">
+        <h1>你输入的内容是：{{message}}</h1>
+        <input type="checkbox" id="checkbox" v-model="checked">
+        <label for="checkbox">{{checked}}</label>
+        <div>-----------------------------------------</div>
+        <input type="checkbox" id="first" value="111" v-model="checkedNames">
+        <label for="first">First</label>
+        <input type="checkbox" id="second" value="222" v-model="checkedNames">
+        <label for="second">Second</label>
+        <input type="checkbox" id="third" value="333" v-model="checkedNames">
+        <label for="third">Third</label>
+        <br>
+        <span>checkNames:{{checkedNames}}</span>
+        <!-- <a v-on:[eventName]="doSomething"></a>
+        <a v-on:focus="doSomething"></a>
+        <form v-on:submit.prevent="onSubmit"></form> -->
+        <!-- <div :style="styleObject" :class="classObject"></div> -->
+    </div>
+    <script type="text/javascript">
+        Vue.config.productionTip = false
+        const vm = new Vue({
+            el: "#root",
+            // data: function() {
+            //         return {
+            //             name: "aaaa"
+            //         }
+            //     }
+            data() {
+                return {
+                    name: "aaa",
+                    address: "bbb",
+                    eventName: "focus",
+                    firstName: "bb",
+                    secondeName: "cc",
+                    isActive: false,
+                    count: 1,
+                    count2: 1,
+                    message: "",
+                    checked: false,
+                    checkedNames: [],
+                    classObject: {
+                        active: true
+                    },
+                    styleObject: {
+                        color: "red"
+                    },
+                    list: [{
+                        id: 1,
+                        name: "1111"
+                    }, {
+                        id: 2,
+                        name: "2222"
+                    }, {
+                        id: 3,
+                        name: "3333"
+                    }, ],
+                    obj: {
+                        title: "ab",
+                        desc: "bbb"
+                    },
+                    nums: [5, 9, 10, 1, 2, 4]
+                }
+            },
+            computed: {
+                totalName: {
+                    get: function() {
+                        return this.firstName + this.secondeName
+                    },
+                    set: function(value) {
+                        this.firstName = value;
+                        this.secondeName = value;
+                    }
+                },
+                filterNums: function() {
+                    const numArr = this.nums.filter(function(num) {
+                        return num % 2 == 0
+                    })
+                    numArr.sort(function(a, b) {
+                        return a - b;
+                    })
+                    return numArr;
+                }
+            }
+            // data: {
+            //     name: "aaa"
+            // }
+            ,
+            methods: {
+                calCount2: function(event) {
+                    if (event) {
+                        console.log(event)
+                    }
+                    return this.count2++;
+                },
+                calCount3: function(event, msg) {
+                    if (event) {
+                        console.log(event)
+                        console.log(msg)
+                    }
+                },
+                enterClick: function() {
+                    alert("enter")
+                },
+                enterClick2: function() {
+                    alert("enter1")
+                }
+            }
+        })
+    </script>
+</body>
+
+</html>
+
+</html>
+
+</html>
+
+</html>
