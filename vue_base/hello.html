@@ -84,6 +84,8 @@
         <blog-post v-for="(item, index) in blogDatas" :key="item.id" :blog="item"></blog-post>
 
         <num-change v-on:dis-num-change="onNumChange"></num-change>
+
+        <alert-box>fagg</alert-box>
         <!-- <a v-on:[eventName]="doSomething"></a>
         <a v-on:focus="doSomething"></a>
         <form v-on:submit.prevent="onSubmit"></form> -->
@@ -120,6 +122,16 @@
                 }
             }
         })
+
+        Vue.component("alert-box", {
+            template: `
+    <div class="demo-alert-box">
+      <strong>Error!</strong>
+      <slot></slot>
+    </div>
+  `
+        })
+
         const vm = new Vue({
             el: "#root",
             // data: function() {
