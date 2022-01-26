@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>事件修饰符</title>
+    <script src="./lib/vue.js"></script>
+    <style>
+        #demo1 {
+            background-color: blue;
+            width: 500px;
+            margin-bottom: 50px;
+        }
+        
+        .box1 {
+            background-color: pink;
+            height: 100px;
+            padding: 10px;
+        }
+        
+        .box2 {
+            background-color: skyblue;
+            height: 50px;
+        }
+        
+        ul {
+            background-color: skyblue;
+            width: 100px;
+            height: 200px;
+            overflow: auto;
+        }
+        
+        li {
+            background-color: rebeccapurple;
+            width: 100px;
+            height: 100px;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="root">
+        <!-- prevent事件修饰符 阻止默认事件 -->
+        <a href="http://www.baidu.com/" @click.prevent="onClickA">百度</a>
+        <div id="demo1" @click="onClickButton">
+            <!-- stop事件 阻止事件冒泡 只触发一次button的onClickButton事件-->
+            <button @click.stop="onClickButton"> 确定</button>
+        </div>
+
+        <!-- once事件只触发一次 -->
+        <button @click.once="onClickButton">按钮2</button>
+
+        <!--  使用事件的捕获模式-->
+        <div class="box1" @click.capture="onShowMsg(1)">
+            div1
+            <div class="box2" @click="onShowMsg(2)">
+                div2
+            </div>
+        </div>
+
+
+        <!-- self  一定程度也可阻止冒泡 e.target==self时触发事件-->
+        <div id="demo2" @click.self="onClickButton">
+            <button @click="onClickButton"> demo2</button>
+        </div>
+
+        <!-- passive  立刻执行   @scroll  @wheel-->
+        <ul @wheel.passive="onScrollView">
+            <li>1</li>
+            <li>2</li>
+            <li>3</li>
+            <li>4</li>
+        </ul>
+    </div>
+    <script>
+        Vue.config.productionTip = false
+        const vm = new Vue({
+            el: "#root",
+            data() {
+                return {}
+            },
+            methods: {
+                onClickA(e) {
+                    // e.preventDefault();
+                    alert("弹出窗口1")
+                },
+                onClickButton(e) {
+                    // e.stopPropagation();
+                    alert("弹出窗口")
+                },
+                onShowMsg(value) {
+                    // 1 2
+                    console.log("触发id" + value)
+                },
+                onScrollView(e) {
+                    for (let i = 0; i < 1000; i++) {
+                        console.log(1)
+                    }
+                    console.log("滚动条滚动结束！！！")
+                }
+            },
+        })
+    </script>
+</body>
+
+</html>
