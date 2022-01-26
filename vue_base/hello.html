@@ -135,121 +135,122 @@
         })
 
         const vm = new Vue({
-            el: "#root",
-            // data: function() {
-            //         return {
-            //             name: "aaaa"
-            //         }
-            //     }
-            data() {
-                return {
-                    name: "aaa",
-                    address: "bbb",
-                    eventName: "focus",
-                    firstName: "bb",
-                    secondeName: "cc",
-                    isActive: false,
-                    count: 1,
-                    count2: 1,
-                    message: "",
-                    radioValue: "",
-                    msg: "",
-                    msg2: "",
-                    age: 1,
-                    checked: false,
-                    checkedNames: [],
-                    seleted: "1",
-                    classObject: {
-                        active: true
-                    },
-                    styleObject: {
-                        color: "red"
-                    },
-                    list: [{
-                        id: 1,
-                        name: "1111"
-                    }, {
-                        id: 2,
-                        name: "2222"
-                    }, {
-                        id: 3,
-                        name: "3333"
-                    }, ],
-                    obj: {
-                        title: "ab",
-                        desc: "bbb"
-                    },
-                    nums: [5, 9, 10, 1, 2, 4],
-                    selectOption: [{
-                        text: "等级",
-                        value: 1
-                    }, {
-                        text: "星级",
-                        value: 2
-                    }, {
-                        text: "战斗力",
-                        value: 3
-                    }],
-                    blogDatas: [{
-                        id: "b1",
-                        title: "blog1"
-                    }, {
-                        id: "b2",
-                        title: "blog2"
-                    }, {
-                        id: "b3",
-                        title: "blog3"
-                    }, ]
-                }
-            },
-            computed: {
-                totalName: {
-                    get: function() {
-                        return this.firstName + this.secondeName
-                    },
-                    set: function(value) {
-                        this.firstName = value;
-                        this.secondeName = value;
+                el: "#root", //等价vm.$mount("#root")
+                // data: function() {
+                //         return {
+                //             name: "aaaa"
+                //         }
+                //     }
+                data() {
+                    return {
+                        name: "aaa",
+                        address: "bbb",
+                        eventName: "focus",
+                        firstName: "bb",
+                        secondeName: "cc",
+                        isActive: false,
+                        count: 1,
+                        count2: 1,
+                        message: "",
+                        radioValue: "",
+                        msg: "",
+                        msg2: "",
+                        age: 1,
+                        checked: false,
+                        checkedNames: [],
+                        seleted: "1",
+                        classObject: {
+                            active: true
+                        },
+                        styleObject: {
+                            color: "red"
+                        },
+                        list: [{
+                            id: 1,
+                            name: "1111"
+                        }, {
+                            id: 2,
+                            name: "2222"
+                        }, {
+                            id: 3,
+                            name: "3333"
+                        }, ],
+                        obj: {
+                            title: "ab",
+                            desc: "bbb"
+                        },
+                        nums: [5, 9, 10, 1, 2, 4],
+                        selectOption: [{
+                            text: "等级",
+                            value: 1
+                        }, {
+                            text: "星级",
+                            value: 2
+                        }, {
+                            text: "战斗力",
+                            value: 3
+                        }],
+                        blogDatas: [{
+                            id: "b1",
+                            title: "blog1"
+                        }, {
+                            id: "b2",
+                            title: "blog2"
+                        }, {
+                            id: "b3",
+                            title: "blog3"
+                        }, ]
                     }
                 },
-                filterNums: function() {
-                    const numArr = this.nums.filter(function(num) {
-                        return num % 2 == 0
-                    })
-                    numArr.sort(function(a, b) {
-                        return a - b;
-                    })
-                    return numArr;
-                }
-            }
-            // data: {
-            //     name: "aaa"
-            // }
-            ,
-            methods: {
-                calCount2: function(event) {
-                    if (event) {
-                        console.log(event)
+                computed: {
+                    totalName: {
+                        get: function() {
+                            return this.firstName + this.secondeName
+                        },
+                        set: function(value) {
+                            this.firstName = value;
+                            this.secondeName = value;
+                        }
+                    },
+                    filterNums: function() {
+                        const numArr = this.nums.filter(function(num) {
+                            return num % 2 == 0
+                        })
+                        numArr.sort(function(a, b) {
+                            return a - b;
+                        })
+                        return numArr;
                     }
-                    return this.count2++;
-                },
-                calCount3: function(event, msg) {
-                    if (event) {
-                        console.log(event)
-                        console.log(msg)
-                    }
-                },
-                enterClick: function() {
-                    alert("enter")
-                },
-                enterClick2: function() {
-                    alert("enter1")
-                },
-                onNumChange: function(num) {
-                    console.log("onNumChange--" + num)
                 }
-            }
-        })
+                // data: {
+                //     name: "aaa"
+                // }
+                ,
+                methods: {
+                    calCount2: function(event) {
+                        if (event) {
+                            console.log(event)
+                        }
+                        return this.count2++;
+                    },
+                    calCount3: function(event, msg) {
+                        if (event) {
+                            console.log(event)
+                            console.log(msg)
+                        }
+                    },
+                    enterClick: function() {
+                        alert("enter")
+                    },
+                    enterClick2: function() {
+                        alert("enter1")
+                    },
+                    onNumChange: function(num) {
+                        console.log("onNumChange--" + num)
+                    }
+                }
+            })
+            // vm.$mount("#root");
     </script>
 </body>
 
