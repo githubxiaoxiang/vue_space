@@ -49,7 +49,9 @@
         <br>
         <span>checkNames:{{checkedNames}}</span>
         <div>---------------------单选-------------------</div>
-        <input type="radio" id="one" value="1" v-model="radioValue">
+        <!-- v-model是v-model:value的简写 -->
+        <!-- :是v-bind:key的简写 -->
+        <input type="radio" id="one" value="1" v-model:value="radioValue">
         <label for="one">选项1</label>
         <input type="radio" id="two" value="2" v-model="radioValue">
         <label for="two">选项2</label>
