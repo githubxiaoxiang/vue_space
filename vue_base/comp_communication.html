@@ -11,6 +11,7 @@
 
 <body>
     <div id="root">
+        <a :href="studyUrl">组件通信学习地址</a></a>
         <h1>root组件</h1>
         <span>{{name}}</span>
         <button v-on:click="onRef">root按钮</button>
@@ -57,7 +58,8 @@
                 return {
                     name: "vm root",
                     nums: [1, 2, 3],
-                    strs: ["aa", "bb", "cc"]
+                    strs: ["aa", "bb", "cc"],
+                    studyUrl: "https://www.cnblogs.com/tugenhua0707/p/11761280.html"
                 };
             },
             components: {
