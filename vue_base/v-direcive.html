@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>自定义指令v-directive</title>
+    <script type="text/javascript" src="././lib/vue.js"></script>
+</head>
+
+<body>
+    <div id="root">
+        <h2>正常n值 <span v-text="n"></span></h2>
+        <h2>放大后的n值 <span v-big="n"></span></h2>
+        <button @click="n++">增加数值</button><br/>
+        <hr/>
+        <input type="text" v-fbind:value="n">
+    </div>
+    <script>
+        Vue.config.productionTip = false
+        Vue.directive("fbind", {
+            bind(element, bind, vnode, oldNode) {
+                element.value = bind.value
+                console.log("fbind/bind")
+            },
+            inserted(element, bind, vnode, oldNode) {
+                element.focus()
+                console.log("fbind/inserted")
+            },
+            update(element, bind, vnode, oldNode) {
+                element.value = bind.value
+                console.log("fbind/update")
+            },
+            componentUpdated(element, bind, vnode, oldNode) {
+                console.log("fbind/componentUpdated")
+            },
+            unbind(element, bind, vnode, oldNode) {
+                console.log("fbind/unbind")
+            }
+        })
+        const vm = new Vue({
+            el: "#root",
+            data: {
+                n: 1
+            },
+            directives: {
+                big(element, bind, vnode, oldNode) {
+                    element.innerText = bind.value * 10
+                    console.log('big', this) //注意此处的this是window
+                    console.log("element" + element)
+                    console.log("bind" + bind)
+                    console.log("vnode" + vnode)
+                    console.log("oldNode" + oldNode)
+                },
+                fbind: {
+                    bind(element, bind, vnode, oldNode) {
+                        element.value = bind.value
+                        console.log("fbind/bind")
+                    },
+                    inserted(element, bind, vnode, oldNode) {
+                        element.focus()
+                        console.log("fbind/inserted")
+                    },
+                    update(element, bind, vnode, oldNode) {
+                        element.value = bind.value
+                        console.log("fbind/update")
+                    },
+                    componentUpdated(element, bind, vnode, oldNode) {
+                        console.log("fbind/componentUpdated")
+                    },
+                    unbind(element, bind, vnode, oldNode) {
+                        console.log("fbind/unbind")
+                    }
+                }
+            }
+        })
+    </script>
+</body>
+
+</html>
+
+</html>
+
+
+</html>
