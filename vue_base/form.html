@@ -11,7 +11,7 @@
 
 <body>
     <div id="root">
-        <form action="">
+        <form @submit.prevent="demo">
             <label for="account">账号：</label>
             <input type="text" name="account" id="account" v-model.trim="userInfo.account"> <br/><br/>
             <label for="name">姓名：</label>
@@ -52,6 +52,11 @@
                         other: "",
                         agree: false
                     }
+                }
+            },
+            methods: {
+                demo() {
+                    console.log(JSON.stringify(this.userInfo))
                 }
             }
         })
