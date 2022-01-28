@@ -1,0 +1,14 @@
+{
+    "include": [
+        "./src/**/*"
+    ],
+    "compilerOptions": {
+        "baseUrl": ".",
+        "paths": {
+            "@/*": [
+                "./src/*"
+            ]
+        },
+    },
+}
+// https://www.cnblogs.com/terrysu/p/9329570.html

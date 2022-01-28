@@ -1,5 +1,7 @@
 import Vue from 'vue'
-import App from './App'
+import App from './App.vue'
+import store from './store'
+import router from './router'
 // 入口文件
 
 /* 
@@ -15,8 +17,11 @@ import App from './App'
 
 // vue inspect >output.js  生成底层脚手架的配置内容 修改output内容没用 只是纯展示输出查看
 // 要修改 添加vue.config.js  https://cli.vuejs.org/zh/config/
+// <v 快速生成.vue代码片段
 Vue.config.productionTip = false
 new Vue({
+    router,
+    store,
     //render函数完成了这个功能：将App组件放入容器中
     // render: h => h(App)
 
