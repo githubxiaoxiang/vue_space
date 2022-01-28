@@ -16,6 +16,7 @@ import router from './router'
 */
 
 // vue inspect >output.js  生成底层脚手架的配置内容 修改output内容没用 只是纯展示输出查看
+// 要修改 添加vue.config.js  https://cli.vuejs.org/zh/config/
 Vue.config.productionTip = false
 
 new Vue({
