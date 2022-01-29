@@ -1,28 +1,71 @@
 <template>
   <div id="app">
-    <h1 ref="r1">我是个测试</h1>
-    <title ref="title">我是个ttle</title>
-    <button @click="showRef">按钮</button>
-    <MyStudent ref="stu"/>
+      <MyHeader v-on:add-item="onAddItem"></MyHeader>
+      <MyList :todos="todos" v-on:del-item="onDelItem" v-on:one-done-change="onDoneChangById"></MyList>
+      <MyFooter :todos="todos" v-on:done-all-change="onDoneChange" v-on:clear-all="onClearAllTodo"></MyFooter>
   </div>
 </template>
 
 <script>
-import MyStudent from './components/MyStudent.vue';
+import MyFooter from './components/MyFooter';
+import MyHeader from './components/MyHeader';
+import MyList from './components/MyList';
+import {nanoid} from 'nanoid'
 export default {
   name: "App",
-  components: {MyStudent},
+  components: {
+    MyFooter,
+    MyHeader,
+    MyList
+  },
   data() {
-    return {};
+    return {
+      increateNum:0,
+      todos:[
+        {id:'001',title:'抽烟',done:true},
+				{id:'002',title:'喝酒',done:false},
+				{id:'003',title:'开车',done:false}
+      ]
+    };
   },
-  methods: {
-    showRef()
+  mounted(){
+    this.increateNum = this.todos.length
+  },
+  methods:{
+    onAddItem(title)
     {
-      console.log(this.$refs.r1)// //真实DOM元素
-      console.log(this.$refs.title)//真实DOM元素
-      console.log(this.$refs.stu)//School组件的实例对象（vc）
+      this.increateNum++
+      let data = {id:nanoid(),title:title,done:false}
+      console.log("nanoid//"+data.id)
+      this.todos.push(data)
+    },
+    onDelItem(id)
+    {
+        this.todos = this.todos.filter(data=>data.id!==id)
+    },
+    onDoneChange(value)
+    {
+      this.todos.forEach(todo=>{
+        // this.$set(todo,"done",value)
+          todo.done=value
+      })
+    },
+    onClearAllTodo()
+    {
+      this.todos = this.todos.filter(todo=>todo.done===false)
+    },
+    onDoneChangById(id)
+    {
+      this.todos.forEach(todo=>{
+        if(todo.id==id)
+        {
+          let bol = !todo.done
+          // this.$set(todo,"done",bol)
+          todo.done =!todo.done
+        }
+      })
     }
-  },
+  }
 };
 </script>
 

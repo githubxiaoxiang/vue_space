@@ -44,3 +44,6 @@ npm view webpack versions
 npm view less-loader versions
 <!-- 安装7指定版本的less-loader  -->
 npm i less-loader@7
+
+<!-- uuid nanoid id生成包 -->
+uuid  nanoid
