@@ -36,3 +36,11 @@ vue-cli-service build 会在 dist/ 目录产生一个可用于生产环境的包
 https://www.jianshu.com/p/2e5973fe1223
 https://zhuanlan.zhihu.com/p/24357762
 https://vuex.vuejs.org/zh/guide/
+
+
+查看webpack的所有版本  若vue脚手架中使用4版本的webpack一般安装6,7版本的less-loader
+npm view webpack versions
+<!-- 查看less-loader的所有版本 -->
+npm view less-loader versions
+<!-- 安装7指定版本的less-loader  -->
+npm i less-loader@7
