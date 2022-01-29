@@ -35,8 +35,8 @@ export default {
     onAddItem(title)
     {
       this.increateNum++
-      let data = {id:nanoid(),title:title,done:false}
-      console.log("nanoid//"+data.id)
+      let data = {id:this.increateNum+"",title:title,done:false}
+      // console.log("nanoid//"+data.id)
       this.todos.push(data)
     },
     onDelItem(id)
