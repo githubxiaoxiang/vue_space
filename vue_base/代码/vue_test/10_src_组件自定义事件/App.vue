@@ -42,6 +42,11 @@
 			}
 		},
 		mounted() {
+			// this.$refs.student.$on('atguigu',(name,...params)=>{
+			// 	// 这里的写成箭头函数 不能写成function function指向student（$on谁侦听function中this指向谁）  this可以读取到app
+			// 	console.log('App收到了学生名：',name,params)
+			// 	this.studentName = name
+			// })
 			this.$refs.student.$on('atguigu',this.getStudentName) //绑定自定义事件
 			// this.$refs.student.$once('atguigu',this.getStudentName) //绑定自定义事件（一次性）
 		},
