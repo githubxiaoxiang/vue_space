@@ -10,6 +10,7 @@
 import MyFooter from './components/MyFooter';
 import MyHeader from './components/MyHeader';
 import MyList from './components/MyList';
+import {nanoid} from 'nanoid'
 export default {
   name: "App",
   components: {
@@ -20,11 +21,12 @@ export default {
   data() {
     return {
       increateNum:0,
-      todos:[
-        {id:'001',title:'抽烟',done:true},
-				{id:'002',title:'喝酒',done:false},
-				{id:'003',title:'开车',done:false}
-      ]
+       todos:JSON.parse(localStorage.getItem("todos"))||[]
+      // todos:[
+      //   {id:'001',title:'抽烟',done:true},
+			// 	{id:'002',title:'喝酒',done:false},
+			// 	{id:'003',title:'开车',done:false}
+      // ]
     };
   },
   mounted(){
@@ -35,6 +37,7 @@ export default {
     {
       this.increateNum++
       let data = {id:this.increateNum+"",title:title,done:false}
+      // console.log("nanoid//"+data.id)
       this.todos.push(data)
     },
     onDelItem(id)
@@ -62,6 +65,14 @@ export default {
           todo.done =!todo.done
         }
       })
+    }
+  },watch:{
+    todos:{
+      deep:true,
+      handler(value)
+      {
+        localStorage.setItem("todos",JSON.stringify(value))
+      }
     }
   }
 };
