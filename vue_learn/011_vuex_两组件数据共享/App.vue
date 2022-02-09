@@ -1,7 +1,7 @@
 <template>
   <div>
     <Count></Count>
-    </br>
+    <br>
     <Person></Person>
   </div>
 </template>
