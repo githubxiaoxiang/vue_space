@@ -8,6 +8,8 @@ export default {
     mounted() {
         console.log("Home挂载了")
         console.log(this)
+        window.homeRoute = this.$route
+        window.homeRouter = this.$router
     },beforeDestroy() {
         console.log("Home销毁了")
     },
