@@ -74,8 +74,8 @@ router.beforeEach((to, from, next) => {
         // to.path === "/home/message" || to.path === "/home/news"
         // to.name==="message"||to.name==="news"
         // to.meta.isAuth  最佳方式  meta中定义变量标识
-    if (to.meta && to.meta.isAuth) {
-        if (localStorage.getItem("school") === "atguigu") {
+    if (to.meta && to.meta.isAuth) { //判断当前路由是否需要进行权限控制
+        if (localStorage.getItem("school") === "atguigu") { //权限的具体规则
             next()
         } else {
             alert("学校名不对，无权限查看")
@@ -85,6 +85,7 @@ router.beforeEach((to, from, next) => {
     }
 })
 
+// 全局后置路由守卫----初始化的时候调用，每次路由切换后调用
 router.afterEach((to, from) => {
     console.log("@全局后置路由@", to, from)
     document.title = to.meta.title || "vue-learn"
