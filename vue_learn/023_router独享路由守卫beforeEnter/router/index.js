@@ -63,19 +63,32 @@ const router = new VueRouter({
         }, {
             path: "news",
             meta: { isAuth: true, title: "新闻" }, //自定义参数
-            component: News
+            component: News,
+            beforeEnter: (to, from, next) => {
+                // 独享路由守卫  只有前置 没有独享后置 可以和全局后置路由守卫一起使用
+                console.log("独守路由守卫", to, from)
+                if (to.meta.isAuth) {
+                    if (localStorage.getItem("school") === "atguigu") {
+                        next()
+                    } else {
+                        alert("学校名不对，无权限查看")
+                    }
+                } else {
+                    next()
+                }
+            }
         }]
     }]
 })
 
 // 全局前置路由守卫----初始化的时候调用，每次路由切换的时候调用
-router.beforeEach((to, from, next) => {
+/**router.beforeEach((to, from, next) => {
     console.log("全局前置路由@", to, from)
         // to.path === "/home/message" || to.path === "/home/news"
         // to.name==="message"||to.name==="news"
         // to.meta.isAuth  最佳方式  meta中定义变量标识
-    if (to.meta && to.meta.isAuth) {
-        if (localStorage.getItem("school") === "atguigu") {
+    if (to.meta && to.meta.isAuth) { //判断当前路由是否需要进行权限控制
+        if (localStorage.getItem("school") === "atguigu") { //权限的具体规则
             next()
         } else {
             alert("学校名不对，无权限查看")
@@ -83,8 +96,9 @@ router.beforeEach((to, from, next) => {
     } else {
         next()
     }
-})
+})**/
 
+// 全局后置路由守卫----初始化的时候调用，每次路由切换后调用
 router.afterEach((to, from) => {
     console.log("@全局后置路由@", to, from)
     document.title = to.meta.title || "vue-learn"
